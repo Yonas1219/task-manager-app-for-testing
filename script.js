@@ -1,5 +1,6 @@
 const taskForm = document.getElementById('task-form');
 const taskList = document.getElementById('task-list');
+const taskPriorityFilter = document.getElementById('task-priority');
 
 // Function to create a new task object
 function createTaskObject(taskText, taskPriority, completed) {
@@ -24,6 +25,12 @@ function getTasksFromLocalStorage() {
 // Function to render tasks from local storage
 function renderTasksFromLocalStorage() {
   const tasks = getTasksFromLocalStorage();
+  renderTasks(tasks);
+}
+
+// Function to render tasks
+function renderTasks(tasks) {
+  taskList.innerHTML = '';
 
   for (const task of tasks) {
     const listItem = createTaskElement(task.text, task.priority, task.completed);
@@ -143,8 +150,25 @@ function toggleTaskCompletion(event) {
   saveTasksToLocalStorage(tasks);
 }
 
+// Function to filter tasks by priority
+function filterTasksByPriority(tasks, priority) {
+  if (priority === 'all') {
+    return tasks;
+  }
+
+  return tasks.filter(task => task.priority === priority);
+}
+
 // Event listener for form submission
 taskForm.addEventListener('submit', addTask);
+
+// Event listener for priority filter changes
+taskPriorityFilter.addEventListener('change', function() {
+  const tasks = getTasksFromLocalStorage();
+  const selectedPriority = taskPriorityFilter.value;
+  const filteredTasks = filterTasksByPriority(tasks, selectedPriority);
+  renderTasks(filteredTasks);
+});
 
 // Render tasks from local storage on page load
 document.addEventListener('DOMContentLoaded', renderTasksFromLocalStorage);

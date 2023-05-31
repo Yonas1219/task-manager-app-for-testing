@@ -21,12 +21,14 @@ h1 {
 
 form {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-bottom: 20px;
 }
 
 input[type="text"] {
   flex: 1;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -34,14 +36,18 @@ input[type="text"] {
 }
 
 select {
+  flex: 1;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-left: 10px;
+  margin-top: 10px;
 }
 
 button[type="submit"] {
+  flex: 1;
+  width: 100%;
   background-color: #4caf50;
   color: #fff;
   border: none;
@@ -49,6 +55,7 @@ button[type="submit"] {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 ul {
@@ -58,6 +65,7 @@ ul {
 
 li {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
@@ -126,4 +134,18 @@ li.completed {
 
 .complete-button:hover {
   background-color: #0288d1;
+}
+
+/* Responsive Styles */
+
+@media screen and (max-width: 600px) {
+  form {
+    flex-direction: column;
+  }
+
+  input[type="text"],
+  select,
+  button[type="submit"] {
+    width: 100%;
+  }
 }
